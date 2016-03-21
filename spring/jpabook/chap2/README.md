@@ -1,4 +1,4 @@
-자바 ORM 표준 JPA 프로그래밍 교재 실습
+# [자바 ORM 표준 JPA 프로그래밍 교재 실습](https://github.com/holyeye/jpabook)
 
 H2DATABASE 사용
 - [H2DATABASE 공식 사이트](http://www.h2database.com/html/download.html)에 접속하여 실행파일 다운로드 받는다.
