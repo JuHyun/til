@@ -1,4 +1,6 @@
-package spittr.web;
+package spittr;
+
+import spittr.SpittrApplication;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
