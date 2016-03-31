@@ -1,5 +1,6 @@
 package spittr.web;
 
+import static java.time.temporal.ChronoUnit.MILLIS;
 import static org.hamcrest.Matchers.hasItems;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -20,10 +21,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by seoungjuhyun on 3/30/16.
+ * SpittleController Test.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SpittrApplication.class)
@@ -33,31 +35,37 @@ public class SpittleControllerTest {
 
     @Test
     public void shouldShowRecentSpittles() throws Exception {
-//        List<Spittle> expectedSpittles = createSpittles(COUNT_OF_SPITTLES);
+        // Given:
 
-//        SpittleRepository mockRepository = mock(SpittleRepository.class);
-//        when(mockRepository.findAll())
-//                .thenReturn(expectedSpittles);
+        List<Spittle> expectedSpittles = createSpittles(COUNT_OF_SPITTLES);
 
-//        SpittleController spittleController =
-//                new SpittleController(mockRepository);
+        SpittleRepository mockRepository = mock(SpittleRepository.class);
+        when(mockRepository.findTop20ByOrderByDateTimeDesc())
+                .thenReturn(expectedSpittles);
+
         SpittleController spittleController =
-                new SpittleController();
+                new SpittleController(mockRepository);
 
         MockMvc mockMvc = standaloneSetup(spittleController).build();
-        mockMvc.perform(get("/test"))
-                .andExpect(view().name("spittles"));
-//                .andExpect(model().attributeExists("spittles"))
-//                .andExpect(model().attribute("spittles",
-//                        hasItems(expectedSpittles.toArray())));
+
+        // When and Then
+
+        mockMvc.perform(get("/spittles"))
+                .andExpect(view().name("spittr/home"))
+                .andExpect(model().attributeExists("spittles"))
+                .andExpect(model().attribute("spittles",
+                        hasItems(expectedSpittles.toArray())));
     }
 
     private List<Spittle> createSpittles(int count) {
         List<Spittle> spittles = new ArrayList<Spittle>();
 
         for (int i = 0; i < count; i++) {
-            spittles.add(new Spittle("Spittle " + i, LocalDateTime.now()));
+            spittles.add(new Spittle("Spittle_" + i,
+                    LocalDateTime.now().plus(i, MILLIS)));
         }
+
+        Collections.reverse(spittles);
 
         return spittles;
     }

@@ -9,25 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by seoungjuhyun on 3/30/16.
+ * SpittleController.
  */
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/spittles")
 public class SpittleController {
 
-//    private SpittleRepository spittleRepository;
+    private SpittleRepository repository;
 
-//    public SpittleController() {
-//    }
-
-//    @Autowired
-//    public SpittleController(SpittleRepository spittleRepository) {
-//        this.spittleRepository = spittleRepository;
-//    }
+    @Autowired
+    public SpittleController(SpittleRepository repository) {
+        this.repository = repository;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String spittleList() {
-//        model.addAttribute("spittles", spittleRepository.findAll());
-        return "spittles";
+    public String spittleList(Model model) {
+        model.addAttribute("spittles",
+                repository.findTop20ByOrderByDateTimeDesc());
+        return "spittr/home";
     }
 }
