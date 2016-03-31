@@ -1,4 +1,4 @@
-package spittr.web;
+package spittr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
