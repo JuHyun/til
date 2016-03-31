@@ -1,5 +1,7 @@
 'use strict';
 
+console.log("webpack rocks!")
+
 // tag::vars[]
 const React = require('react');
 const client = require('./client');
@@ -21,7 +23,7 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<SpittleList spittles={this.state.spittles}/>
+			   <SpittleList spittles={this.state.spittles}/>
 		)
 	}
 }

@@ -69,50 +69,50 @@
 			_classCallCheck(this, App);
 	
 			_get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
-			this.state = { employees: [] };
+			this.state = { spittles: [] };
 		}
 	
 		// end::app[]
 	
-		// tag::employee-list[]
+		// tag::spittle-list[]
 	
 		_createClass(App, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
 				var _this = this;
 	
-				client({ method: 'GET', path: '/api/employees' }).done(function (response) {
-					_this.setState({ employees: response.entity._embedded.employees });
+				client({ method: 'GET', path: '/api/spittles' }).done(function (response) {
+					_this.setState({ spittles: response.entity._embedded.spittles });
 				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				return React.createElement(EmployeeList, { employees: this.state.employees });
+				return React.createElement(SpittleList, { spittles: this.state.spittles });
 			}
 		}]);
 	
 		return App;
 	})(React.Component);
 	
-	var EmployeeList = (function (_React$Component2) {
-		_inherits(EmployeeList, _React$Component2);
+	var SpittleList = (function (_React$Component2) {
+		_inherits(SpittleList, _React$Component2);
 	
-		function EmployeeList() {
-			_classCallCheck(this, EmployeeList);
+		function SpittleList() {
+			_classCallCheck(this, SpittleList);
 	
-			_get(Object.getPrototypeOf(EmployeeList.prototype), 'constructor', this).apply(this, arguments);
+			_get(Object.getPrototypeOf(SpittleList.prototype), 'constructor', this).apply(this, arguments);
 		}
 	
-		// end::employee-list[]
+		// end::spittle-list[]
 	
-		// tag::employee[]
+		// tag::spittle[]
 	
-		_createClass(EmployeeList, [{
+		_createClass(SpittleList, [{
 			key: 'render',
 			value: function render() {
-				var employees = this.props.employees.map(function (employee) {
-					return React.createElement(Employee, { key: employee._links.self.href, employee: employee });
+				var spittles = this.props.spittles.map(function (spittle) {
+					return React.createElement(Spittle, { key: spittle._links.self.href, spittle: spittle });
 				});
 				return React.createElement(
 					'table',
@@ -136,28 +136,28 @@
 							'Description'
 						)
 					),
-					employees
+					spittles
 				);
 			}
 		}]);
 	
-		return EmployeeList;
+		return SpittleList;
 	})(React.Component);
 	
-	var Employee = (function (_React$Component3) {
-		_inherits(Employee, _React$Component3);
+	var Spittle = (function (_React$Component3) {
+		_inherits(Spittle, _React$Component3);
 	
-		function Employee() {
-			_classCallCheck(this, Employee);
+		function Spittle() {
+			_classCallCheck(this, Spittle);
 	
-			_get(Object.getPrototypeOf(Employee.prototype), 'constructor', this).apply(this, arguments);
+			_get(Object.getPrototypeOf(Spittle.prototype), 'constructor', this).apply(this, arguments);
 		}
 	
-		// end::employee[]
+		// end::spittle[]
 	
 		// tag::render[]
 	
-		_createClass(Employee, [{
+		_createClass(Spittle, [{
 			key: 'render',
 			value: function render() {
 				return React.createElement(
@@ -166,23 +166,23 @@
 					React.createElement(
 						'td',
 						null,
-						this.props.employee.firstName
+						this.props.spittle.firstName
 					),
 					React.createElement(
 						'td',
 						null,
-						this.props.employee.lastName
+						this.props.spittle.lastName
 					),
 					React.createElement(
 						'td',
 						null,
-						this.props.employee.description
+						this.props.spittle.description
 					)
 				);
 			}
 		}]);
 	
-		return Employee;
+		return Spittle;
 	})(React.Component);
 	
 	React.render(React.createElement(App, null), document.getElementById('react'));

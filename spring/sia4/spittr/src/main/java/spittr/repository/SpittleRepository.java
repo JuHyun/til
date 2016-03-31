@@ -15,9 +15,5 @@ import java.util.List;
 @Repository
 public interface SpittleRepository extends JpaRepository<Spittle, Long> {
 
-    List<Spittle> findAll();
-
-    Page<Spittle> findAll(Pageable pageable);
-
     List<Spittle> findTop20ByOrderByDateTimeDesc();
 }
