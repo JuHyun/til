@@ -51,7 +51,7 @@ public class SpittleControllerTest {
         // When and Then
 
         mockMvc.perform(get("/spittles"))
-                .andExpect(view().name("spittr/home"))
+                .andExpect(view().name("spittr/spittles"))
                 .andExpect(model().attributeExists("spittles"))
                 .andExpect(model().attribute("spittles",
                         hasItems(expectedSpittles.toArray())));

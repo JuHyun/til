@@ -1,18 +1,15 @@
 package spittr.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Spittle Entity.
@@ -43,8 +40,7 @@ public class Spittle {
         this(message, dateTime, null, null);
     }
 
-    public Spittle(String message, LocalDateTime dateTime,
-                   Double longitude, Double latitude) {
+    public Spittle(String message, LocalDateTime dateTime, Double longitude, Double latitude) {
         this.message = message;
         this.dateTime = dateTime;
         this.longitude = longitude;

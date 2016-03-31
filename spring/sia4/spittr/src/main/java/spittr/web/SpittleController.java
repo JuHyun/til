@@ -1,12 +1,12 @@
 package spittr.web;
 
-import spittr.repository.SpittleRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import spittr.repository.SpittleRepository;
 
 /**
  * SpittleController.
@@ -26,6 +26,6 @@ public class SpittleController {
     public String spittleList(Model model) {
         model.addAttribute("spittles",
                 repository.findTop20ByOrderByDateTimeDesc());
-        return "spittr/home";
+        return "spittr/spittles";
     }
 }
