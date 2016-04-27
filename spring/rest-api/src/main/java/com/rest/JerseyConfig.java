@@ -1,6 +1,6 @@
 package com.rest;
 
-import com.rest.api.HelloWorldResource;
+import com.rest.api.HealthResource;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import org.springframework.stereotype.Component;
@@ -19,6 +19,6 @@ public class JerseyConfig extends ResourceConfig {
     }
 
     private void registerEndpoints() {
-        register(HelloWorldResource.class);
+        register(HealthResource.class);
     }
 }
