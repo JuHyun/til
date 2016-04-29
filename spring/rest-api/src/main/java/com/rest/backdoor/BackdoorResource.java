@@ -1,7 +1,5 @@
 package com.rest.backdoor;
 
-import com.rest.domain.Customer;
-import com.rest.repository.CustomerRepository;
 import com.rest.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +17,17 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Path("/_backdoor")
-@Produces(MediaType.TEXT_PLAIN)
+@Produces(MediaType.APPLICATION_JSON)
 public class BackdoorResource {
 
     @Autowired
     private CustomerService customerService;
 
     @GET
-    @Path("/create")
-    public Response createCustomer() {
-//        customerService.save("aaa", "bbb");
+    @Path("/create/{firstname}/{lastname}")
+    public Response create(@PathParam("firstname") String firstname,
+                           @PathParam("lastname") String lastname) {
+        customerService.save(firstname, lastname);
         return Response.ok().build();
     }
 }

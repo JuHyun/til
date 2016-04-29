@@ -32,6 +32,11 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
+    public Customer save(String firstname, String lastname) {
+        Customer customer = new Customer(firstname, lastname);
+        return customerRepository.save(customer);
+    }
+
     public Page<Customer> findAll(int page, int size, List<String> sort, String direction) {
         PageRequest pageRequest = new PageRequest(page, size,
                 Sort.Direction.fromString(direction),
