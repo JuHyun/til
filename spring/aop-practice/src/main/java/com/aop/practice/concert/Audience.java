@@ -1,9 +1,8 @@
 package com.aop.practice.concert;
 
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 import org.springframework.stereotype.Component;
@@ -16,23 +15,17 @@ public class Audience {
     public void performace() {
     }
 
-    @Before("performace()")
-    public void silenceCellPhones() {
-        System.out.println("Sliencing cell phones");
-    }
+    @Around("performace()")
+    public void watchPerformance(ProceedingJoinPoint joinPoint) {
+        try {
+            System.out.println("Around::Sliencing cell phones");
+            System.out.println("Around::Taking seats");
 
-    @Before("performace()")
-    public void takeSeats() {
-        System.out.println("Taking seats");
-    }
+            joinPoint.proceed();
 
-    @AfterReturning("performace()")
-    public void applause() {
-        System.out.println("CLAP CLAP");
-    }
-
-    @AfterThrowing("performace()")
-    public void demandRefund() {
-        System.out.println("Demanding a refund");
+            System.out.println("Around::Taking seats");
+        } catch (Throwable throwable) {
+            System.out.println("Around::Demanding a refund");
+        }
     }
 }
