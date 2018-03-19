@@ -1,0 +1,11 @@
+html
+  head
+    title CART
+  body
+    h1 Cart
+
+    ul
+      each val, key in cart
+        li= key + '{' + val + '}'
+
+    a(href='/products') Product List
