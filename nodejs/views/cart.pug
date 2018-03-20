@@ -7,5 +7,7 @@ html
     ul
       each val, key in cart
         li= key + '{' + val + '}'
+      else
+        li Empty Cart
 
     a(href='/products') Product List

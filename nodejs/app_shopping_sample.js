@@ -25,7 +25,7 @@ app.get(['/cart', '/cart/:productId'], (req, res) => {
   
   if(cart[productId]) {
     cart[productId] = parseInt(cart[productId]) + 1;
-  } else {
+  } else if (!isNaN(parseInt(productId))) {
     cart[productId] = 1;
   }
   
