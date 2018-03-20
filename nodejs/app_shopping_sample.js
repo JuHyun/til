@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-app.use(cookieParser());
+app.use(cookieParser('a3qio!#%Qiruafjio!!$o9p2j'));
 
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -19,8 +19,8 @@ app.get(['/cart', '/cart/:productId'], (req, res) => {
   var productId = req.params.productId;
   
   var cart = {};
-  if (req.cookies.cart) {
-    cart = req.cookies.cart;
+  if (req.signedCookies.cart) {
+    cart = req.signedCookies.cart;
   }
   
   if(cart[productId]) {
@@ -29,7 +29,7 @@ app.get(['/cart', '/cart/:productId'], (req, res) => {
     cart[productId] = 1;
   }
   
-  res.cookie('cart', cart);
+  res.cookie('cart', cart, {signed: true});
   res.render('cart', {'cart': cart});
 });
 
