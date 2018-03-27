@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const assert = require('assert');
-const md5 = require('md5');
+const sha512 = require('sha512');
 
 const app = express();
 
@@ -34,13 +34,13 @@ app.use(session({
 const User = [
   {
     username: 'user1',
-    password: 'ab538bd080d82d91ce60a6c83fb1a179',
+    password: 'fc7f433f78ce28e7d769a36084d09bbbc527181bbb6bf776f8ea5088f76b83ae83a8d7a1ee008b03d7ddd89c7a1503505819bc6df18b32e06188459276bfa7bd',
     salt: 'dfjgq4rio23r5$#%qr839249#$',
     displayName: 'Apple'
   },
   {
     username: 'user2',
-    password: '93d8b557fc2c37cfcc653e9e4d51fb0f',
+    password: 'a06dd6814971a71f5bf83c8d538afe380f0e22d3cf1399169365e8b680465f70ee135ce49a49a236f78f0e2f04c00dd9d313347e0086e9649ac52d9973c266d6',
     salt: '&#^)fgwklwtu4ifliqr#$#)$2j@',
     displayName: 'Pear'
   }
@@ -65,8 +65,7 @@ app.get('/auth/login', (req, res) => {
 app.post('/login', (req, res) => {
   let username = req.body.username;
   for (var user of User) {
-    console.log(user.username + ':' + user.password);
-    if (user.username === username && user.password === md5(req.body.password + user.salt)) {
+    if (user.username === username && user.password === sha512(req.body.password + user.salt).toString('hex')) {
       req.session.username = user.displayName;
       return req.session.save(() => {
         res.redirect('/welcome');
