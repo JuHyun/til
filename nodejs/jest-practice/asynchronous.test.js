@@ -1,4 +1,4 @@
-const {fetchData, fetchData2, fetchData3} = require('./sample')
+const {fetchData, fetchData2, fetchData3} = require('./app/sample')
 
 test('the data is peanut butter', done => {
     function callback(data) {
@@ -55,3 +55,11 @@ test('the data is peanut butter with async/await and reject', async () => {
     expect.assertions(1)
     await expect(fetchData3()).rejects.toMatch('error')
 })
+
+test.only('this will be the only test that runs', () => {
+    expect(true).toBeTruthy();
+});
+
+test('this test will not run', () => {
+    expect('A').toBe('A');
+});
