@@ -6,6 +6,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = "com.aop.practice.concert")
+@ComponentScan(basePackages = "com.aop.practice")
 public class ConcertConfig {
 }
