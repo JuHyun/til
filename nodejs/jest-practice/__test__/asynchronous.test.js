@@ -1,4 +1,4 @@
-const {fetchData, fetchData2, fetchData3} = require('./app/sample')
+const {fetchData, fetchData2, fetchData3} = require('../app/sample')
 
 test('the data is peanut butter', done => {
     function callback(data) {
