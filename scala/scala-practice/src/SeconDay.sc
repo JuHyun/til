@@ -17,6 +17,7 @@ Nil == List()
 
 List(1, 2) :: List(3, 4) :: Nil
 
+// :type은 sbt에서만 사용 가능함.
 //:type List(1,2,3)
 
 List(1, "asdf")
@@ -45,6 +46,9 @@ List(1, 2, 3, 4, 5, 6) == append(List(1, 2, 3), List(4, 5, 6))
 List(1, 2, 3) :: List(4, 5) :: Nil
 
 List(1, 2, 3) ::: List(4, 5)
+1 :: 2 :: 3 :: 4 :: 5 :: Nil
+List(1, 2, 3, 4, 5)
+List(1, 2, 3) ::: List(4, 5) == List(1, 2, 3, 4, 5)
 
 //head
 //tail
@@ -94,5 +98,13 @@ List(4, 5, 6) == append_(Nil, List(4, 5, 6))
 List(1, 2, 3, 4, 5, 6) == append_(List(1, 2, 3), List(4, 5, 6))
 List(4, 5, 6) == append_(List(4, 5, 6), Nil)
 
-// assignment
-// reverse 
+
+/////////////////////////////////////////////////////
+//                   Reverse                       //
+/////////////////////////////////////////////////////
+def reverse(l1: List[Any]): List[Any] = l1 match {
+  case Nil => l1
+  case x :: xs => reverse(xs) ::: List(x)
+}
+
+reverse(List(1, 2, 3, 4)) == List(4, 3, 2, 1)
