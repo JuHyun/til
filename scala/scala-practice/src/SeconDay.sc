@@ -108,3 +108,12 @@ def reverse(l1: List[Any]): List[Any] = l1 match {
 }
 
 reverse(List(1, 2, 3, 4)) == List(4, 3, 2, 1)
+
+
+def reverse_(l: List[Any]): List[Any] = {
+  def reverse_iter(l: List[Any], r: List[Any]): List[Any] = l match {
+    case Nil => r
+    case x::xs => reverse_iter(l, xs::r)
+  }
+  reverse_iter(l, Nil)
+}
