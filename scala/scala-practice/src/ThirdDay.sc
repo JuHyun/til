@@ -69,3 +69,7 @@ twice(plusOne, 0)
 twice(plusOne, 1)
 twice(plusOne, 2)
 
+var multiply3: Int => Int = x => x * 3
+twice(multiply3, 5)
+
+
