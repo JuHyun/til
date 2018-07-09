@@ -11,6 +11,7 @@ add(2, 3)
 
 var addOne: (Int) => Int = (x) => x + 1
 val map: ((Int => Int), List[Int]) => List[Int] = (f, l) => (f, l) match {
+//val map2: ((Int => Int), List[Int]) => List[Int] = {
   case (_, Nil) => Nil
   case (f, x :: xs) => f(x) :: map(f, xs)
 }
@@ -50,4 +51,6 @@ val filter2: ((Int => Boolean), List[Int]) => List[Int] = {
 // :: :: ::
 var addCurry: Int => (Int => Int) = a => (b => a + b)
 var addCurry2: Int => Int => Int = a => b => a + b
+
+
 
