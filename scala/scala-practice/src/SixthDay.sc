@@ -82,6 +82,11 @@ def foldr_g[A, B]: (A => B => B) => B => List[A] => B = f => v => {
   case x :: xs => f(x)(foldr_g(f)(v)(xs))
 }
 
+var add: Int => Int => Int = x => y => x + y
+var sum = foldr_g(add)(0)
+
+sum(List(1, 2, 3))
+
 def length[A]: List[A] => Int = foldr_g((_: A) => (y: Int) => 1 + y)(0)
 length(List(1, 2, 3, 4, 5))
 
@@ -90,4 +95,7 @@ reverse(List(1, 2, 3, 4, 5))
 
 
 // homework!
-def foldl[A, B]: (A => B => A) => A => List[B] => A = {}
+def foldl[A, B]: (A => B => A) => A => List[B] => A = f => v => {
+  case Nil => v
+  case x::xs => foldl(f)(f(v)(x))(xs)
+}
