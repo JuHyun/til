@@ -100,6 +100,7 @@ val toInt: Season => Int = {
 
 toInt(Summer)
 
+
 //// homework.
 // toSeason
 // Next
