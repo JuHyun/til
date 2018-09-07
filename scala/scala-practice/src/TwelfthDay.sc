@@ -1,3 +1,4 @@
+import scala.concurrent.Awaitable
 // Monoid는 fold를 일반화 시키는 것임.
 // 규칙: Monoid는 항등원을 앞에 붙이든 뒤에 붙이든 나 자신이 나와야 함.
 // 결합법칙이 지켜져야 함. <-- Monoide는 분산처리할 때 중요함.
@@ -39,7 +40,49 @@ for {
 
 // cats.Monoid
 
-import cats.monoid
+//import cats.monoid
+//
+//// semigroup
+//
+//def foldr[A, B]: (A => B => B) => B => List[A] => B = f => n => {
+//  case Nil => n
+//  case x :: xs => f(x)(foldr(f)(n)(xs))
+//}
+//
+//
+//trait Monoid[M] {
+//  def mempty: M
+//  def mappend: M => M => M
+//  def mconcat: List[M] => M = foldr[M, M](mappend)(mempty)
+//}
+//
+//def foldMap[A, B: Monoid](va: Vector[A])(f: A => B): B = va.map(f).foldLeft(Monoid[B].empty)(_ |+| _)
+//va.foldLeft(Monoid[B].empty)(_ |+| f(_))
+//
+//foldMap(Vector(1,2,3))(identity)
+//foldMap(Vector(1,2,3))(_ + " >>> ")
+//foldMap("Hello, World".toVector)(_.toString.toUpperCase)
 
-// semigroup
+Runtime.getRuntime.availableProcessors
+
+(1 to 12).toVector.grouped(3)
+(1 to 12).toVector.grouped(3).foreach(println)
+
+// Future
+//trait Future[+T] extends Awaitable[T]
+//
+//object Future {
+//
+//}
+
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
+
+//val f = Future(foldMap((1 to 10000).toVector)(identity()))
+
+Future.sequence(List(Future(1), Future(2), Future(3)))
+
+def parallelFoldMap[A, b]
+
+import cats;
 
