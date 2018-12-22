@@ -8,7 +8,7 @@ Vue.use(Auth, {
   issuer: 'https://dev-791686.oktapreview.com/oauth2/default',
   client_id: '0oaiimobxuMPHww5g0h7',
   redirect_uri: 'http://localhost:8080/implicit/callback',
-  scope: 'openid profile email' 
+  scope: 'openid profile email'
 })
 
 Vue.use(Router)
