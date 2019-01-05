@@ -1,15 +1,77 @@
 body {
-  background-color: rgb(231, 229, 226);
+  background-color: rgb(41, 43, 66);
+}
+
+.main-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* background-image: url('./images/1.jpg'); */
+}
+
+.center {
+    display: block;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+}
+
+.center-below {
+    display: block;
+    top: 70.5%;
+    width: 100%;
+    text-align: center;
+}
+
+.js-clock {
+    font-size: 80px;
 }
 
 h1 {
     color: #34495e;
     transition: color 0.5s ease-in-out;
+    margin: 0%;
 }
+
 .clicked {
     color: #1abc9c;
 }
 
 .btn {
     cursor: pointer;
+}
+
+.form,
+.greetings
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    animation: fadeIn .5s linear;
+}
+
+.right {
+    color: white;
 }
