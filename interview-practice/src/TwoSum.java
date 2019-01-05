@@ -6,7 +6,7 @@ public class TwoSum {
     private static Map<Integer, Integer> numPositions;
 
     public static int[] findTwoSum(int[] list, int sum) {
-        numPositions = new HashMap<>();
+        numPositions = new HashMap<Integer, Integer>();
         System.out.println("sum: " + sum);
         if (list == null || list.length <= 1)
             return null;

@@ -1,14 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-class MergeNamesTest {
+public class MergeNamesTest {
 
     @Test
     public void test() {
         String[] names1 = new String[]{"Ava", "Emma", "Olivia"};
         String[] names2 = new String[]{"Olivia", "Sophia", "Emma"};
-        assertThat(MergeNames.uniqueNames(names1, names2), is(new String[]{"Ava", "Emma", "Olivia", "Sophia"}));
+        String[] expected = new String[]{"Ava", "Emma", "Olivia", "Sophia"};
+        assertArrayEquals(expected, MergeNames.uniqueNames(names1, names2));
     }
 }

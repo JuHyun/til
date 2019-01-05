@@ -8,7 +8,7 @@ public class MergeNames {
             throw new UnsupportedOperationException("Waiting to be implemented.");
         }
 
-        Set<String> set = new HashSet<>();
+        Set<String> set = new HashSet<String>();
 
         for (String name : names1) {
             set.add(name);

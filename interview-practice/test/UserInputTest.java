@@ -1,7 +1,6 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.Test;
 
 class UserInputTest {
 
@@ -12,6 +11,6 @@ class UserInputTest {
         input.add('a');
         input.add('0');
 
-        assertThat(input.getValue(), equalTo("10"));
+        assertEquals("10", input.getValue());
     }
 }
