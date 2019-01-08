@@ -1,8 +1,9 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 
-class UserInputTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+public class UserInputTest {
 
     @Test
     public void numericInput() {
