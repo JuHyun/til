@@ -17,8 +17,8 @@ public class Spring5DiDemoSpringDiApplication {
                 SpringApplication.run(Spring5DiDemoSpringDiApplication.class, args);
 
         MyContoller myContoller = (MyContoller) applicationContext.getBean("myContoller");
-        myContoller.hello();
 
+        System.out.println(myContoller.hello());
         System.out.println(applicationContext.getBean(ConstructorInjectedController.class).sayHello());
         System.out.println(applicationContext.getBean(SetterInjectedController.class).sayHello());
         System.out.println(applicationContext.getBean(PropertyInjectedController.class).sayHello());
