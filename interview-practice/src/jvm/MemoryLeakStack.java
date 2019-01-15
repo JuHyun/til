@@ -20,7 +20,13 @@ public class MemoryLeakStack<E> {
 
     public E pop() {
         stackPointer--;
-        return stackValue.get(stackPointer);
+        E e = stackValue.get(stackPointer);
+        remove();
+        return e;
+    }
+
+    private void remove() {
+        stackValue.remove(stackPointer);
     }
 
     /* Overriding finalize method to check which object is garbage collected */
