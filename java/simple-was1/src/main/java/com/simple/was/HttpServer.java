@@ -3,6 +3,7 @@ package com.simple.was;
 import com.simple.was.config.ServerConfig;
 import com.simple.was.config.ServerConfigLoader;
 import com.simple.was.config.VirtualHost;
+import com.simple.was.requesthandler.RequestHandlerManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,23 +20,16 @@ import java.util.logging.Logger;
 public class HttpServer {
     private static final Logger logger = Logger.getLogger(HttpServer.class.getCanonicalName());
     private static final int NUM_THREADS = 50;
-    private static final String INDEX_FILE = "index.html";
-    //    private final File rootDirectory;
-//    private final int port;
+    private RequestHandlerManager requestHandlerManager;
     private ServerConfig serverConfig;
 
     public void setServerConfig(ServerConfig serverConfig) {
         this.serverConfig = serverConfig;
     }
 
-//    public HttpServer(File rootDirectory, int port) throws IOException {
-//        if (!rootDirectory.isDirectory()) {
-//            throw new IOException(rootDirectory
-//                    + " does not exist as a directory");
-//        }
-//        this.rootDirectory = rootDirectory;
-//        this.port = port;
-//    }
+    public void setRequestHandlerManager(RequestHandlerManager requestHandlerManager) {
+        this.requestHandlerManager = requestHandlerManager;
+    }
 
     public void start() throws IOException {
         ExecutorService pool = Executors.newFixedThreadPool(NUM_THREADS);
@@ -47,7 +41,8 @@ public class HttpServer {
                 try {
                     Socket request = server.accept();
                     File file = new File(virtualHost.getDocumentRoot());
-                    Runnable r = new RequestProcessor(file, INDEX_FILE, request);
+//                    Runnable r = new RequestProcessor(file, INDEX_FILE, request);
+                    Runnable r = new RequestProcessor(request, serverConfig, requestHandlerManager);
                     pool.submit(r);
                 } catch (IOException ex) {
                     logger.log(Level.WARNING, "Error accepting connection", ex);

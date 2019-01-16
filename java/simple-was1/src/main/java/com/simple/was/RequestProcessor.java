@@ -1,5 +1,8 @@
 package com.simple.was;
 
+import com.simple.was.config.ServerConfig;
+import com.simple.was.requesthandler.RequestHandlerManager;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.URLConnection;
@@ -13,6 +16,14 @@ public class RequestProcessor implements Runnable {
     private File rootDirectory;
     private String indexFileName = "index.html";
     private Socket connection;
+    private ServerConfig serverConfig;
+    private RequestHandlerManager requestHandlerManager;
+
+    public RequestProcessor(Socket request, ServerConfig serverConfig, RequestHandlerManager requestHandlerManager) {
+        this.connection = connection;
+        this.serverConfig = serverConfig;
+        this.requestHandlerManager = requestHandlerManager;
+    }
 
     public RequestProcessor(File rootDirectory, String indexFileName, Socket connection) {
         if (rootDirectory.isFile()) {

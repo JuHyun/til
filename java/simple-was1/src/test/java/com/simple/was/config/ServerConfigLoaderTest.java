@@ -12,7 +12,9 @@ public class ServerConfigLoaderTest {
 
     @Test
     public void shouldSuccessLoadingConfigInfos() {
-        List<VirtualHost> virtualHosts = Arrays.asList(VirtualHost.create("a.com", "docRootA"), VirtualHost.create("b.com", "docRootB"));
+        VirtualHost virtualHost1 = VirtualHost.create("a.com", "docRootA", "403b.html", "404b.html", "500b.html");
+        VirtualHost virtualHost2 = VirtualHost.create("b.com", "docRootB", "403b.html", "404b.html", "500b.html");
+        List<VirtualHost> virtualHosts = Arrays.asList(virtualHost1, virtualHost2);
         ServerConfig expected = ServerConfig.create(8090, virtualHosts);
         ServerConfig config = ServerConfigLoader.getConfig("serverConfig.json");
 
