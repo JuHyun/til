@@ -3,3 +3,4 @@ __pycache__/
 myenv/
 *.iml
 interview-practice/out/*
+java/simple-was/out/*
