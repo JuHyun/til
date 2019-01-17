@@ -1,0 +1,13 @@
+{
+  "port": 8090,
+  "virtualHosts": [
+    {
+      "serverName": "a.com",
+      "documentRoot": "docRootA"
+    },
+    {
+      "serverName": "b.com",
+      "documentRoot": "docRootB"
+    }
+  ]
+}
