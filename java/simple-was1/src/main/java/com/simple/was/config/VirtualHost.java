@@ -81,4 +81,15 @@ public class VirtualHost {
     public int hashCode() {
         return Objects.hash(serverName, documentRoot, forbidden, notFound, internalServerError);
     }
+
+    @Override
+    public String toString() {
+        return "VirtualHost{" +
+                "serverName='" + serverName + '\'' +
+                ", documentRoot='" + documentRoot + '\'' +
+                ", forbidden='" + forbidden + '\'' +
+                ", notFound='" + notFound + '\'' +
+                ", internalServerError='" + internalServerError + '\'' +
+                '}';
+    }
 }

@@ -3,16 +3,16 @@ package com.simple.was;
 import com.simple.was.config.ServerConfig;
 import com.simple.was.httpRequest.HttpRequestProcessor;
 import com.simple.was.requesthandler.RequestHandlerManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class RequestProcessor implements Runnable {
 
-    private final static Logger logger = Logger.getLogger(RequestProcessor.class.getCanonicalName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestProcessor.class);
 
     private Socket connection;
     private ServerConfig serverConfig;
@@ -26,19 +26,17 @@ public class RequestProcessor implements Runnable {
 
     @Override
     public void run() {
-        // for security checks
         try {
             Map<String, String> header = getHeader();
 
-            HttpRequestProcessor httpRequestProcessor =
-                    new HttpRequestProcessor(header, serverConfig, requestHandlerManager);
+            HttpRequestProcessor httpRequestProcessor = new HttpRequestProcessor(header, serverConfig, requestHandlerManager);
             httpRequestProcessor.process(connection);
 
         } catch (IOException ex) {
-            logger.log(Level.WARNING, "Error talking to " + connection.getRemoteSocketAddress(), ex);
+            LOGGER.error("Error talking to " + connection.getRemoteSocketAddress(), ex);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.log(Level.WARNING, "Error talking to " + connection.getRemoteSocketAddress(), e);
+            LOGGER.error("Error talking to " + connection.getRemoteSocketAddress(), e);
         } finally {
             try {
                 connection.close();

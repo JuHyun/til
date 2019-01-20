@@ -1,0 +1,19 @@
+{
+  "port": 8000,
+  "virtualHosts": [
+    {
+      "serverName": "a.com",
+      "documentRoot": "docRootA",
+      "forbidden": "403a.html",
+      "notFound": "404a.html",
+      "internalServerError": "500a.html"
+    },
+    {
+      "serverName": "b.com",
+      "documentRoot": "docRootB",
+      "forbidden": "403b.html",
+      "notFound": "404b.html",
+      "internalServerError": "500b.html"
+    }
+  ]
+}

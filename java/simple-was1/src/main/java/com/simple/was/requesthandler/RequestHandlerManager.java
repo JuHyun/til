@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class RequestHandlerManager {
 
-    private Map<String, SimpleHandler> servletMap = new HashMap<String, SimpleHandler>();
+    private Map<String, BasicHandler> servletMap = new HashMap<String, BasicHandler>();
 
-    public Map<String, SimpleHandler> getServletMap() {
+    public Map<String, BasicHandler> getServletMap() {
         return servletMap;
     }
 
-    public void putServlet(SimpleHandler handler) {
+    public void putServlet(BasicHandler handler) {
         if(handler == null) {
             throw new RuntimeException("can`t input null handler!");
         }
