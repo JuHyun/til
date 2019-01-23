@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 class JavaStringTest {
 
     @Test
@@ -37,5 +40,11 @@ class JavaStringTest {
     @Test
     public void atoi() {
         assertEquals(123, JavaString.atoi("123"));
+    }
+
+    @Test
+    public void currencyWithComma() {
+        String currency = JavaString.currencyWithComma("1335780");
+        assertEquals("1,335,780", currency);
     }
 }

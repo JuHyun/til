@@ -18,4 +18,31 @@ public class JavaString {
         }
         return result;
     }
+
+    public static String currencyWithComma(String price) {
+        int priceSize = price.length();
+        int countOfComma = getCountOfComma(priceSize);
+
+        final char[] currency = new char[priceSize + countOfComma];
+
+        int j = 0;
+        for (int i = priceSize - 1; i >= 0; i--) {
+            if (isCommaPosition(priceSize, i)) {
+                currency[j] = ',';
+                j++;
+            }
+            currency[j] = price.charAt(priceSize - i - 1);
+            j++;
+        }
+
+        return String.valueOf(currency);
+    }
+
+    private static boolean isCommaPosition(int priceSize, int i) {
+        return (priceSize - i + 1) % 3 == 0;
+    }
+
+    private static int getCountOfComma(int priceSize) {
+        return priceSize / 3;
+    }
 }
