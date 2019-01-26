@@ -5,3 +5,6 @@ myenv/
 interview-practice/out/*
 java/simple-was/out/*
 java/simple-was1/target
+.gradle/
+build/
+interview-practice/out/

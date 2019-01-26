@@ -25,14 +25,14 @@ class InsertElementToLinkedListTest {
 
     @Test
     public void suceess() {
-        assertEquals(5, numbers.get(2));
+        assertEquals(Integer.valueOf(5), numbers.get(2));
 
         List<Integer> insert = InsertElementToLinkedList.insert(numbers, 4);
 
         insert.stream().forEach(System.out::println);
 
-        assertEquals(4, insert.get(2));
-        assertEquals(5, insert.get(3));
+        assertEquals(Integer.valueOf(4), insert.get(2));
+        assertEquals(Integer.valueOf(5), insert.get(3));
 //        System.out.println("------------------");
 //        List<Integer> insert1 =
 //                InsertElementToLinkedList.insert(new LinkedList<>(Arrays.asList(1, 3, 5, 7, 9)), 8);
@@ -42,7 +42,7 @@ class InsertElementToLinkedListTest {
 
     @Test
     public void suceess2() {
-        assertEquals(5, numbers.get(2));
+        assertEquals(Integer.valueOf(5), numbers.get(2));
 
 //        List<Integer> insert = InsertElementToLinkedList.insertWithQuickSort(numbers, 4);
 //
@@ -59,7 +59,7 @@ class InsertElementToLinkedListTest {
         List<Integer> insert3 =
                 InsertElementToLinkedList.insertWithQuickSort(new LinkedList<>(Arrays.asList(1, 3, 5, 7, 9)), 8);
         insert3.stream().forEach(System.out::println);
-        assertEquals(8, insert3.get(4));
+        assertEquals(Integer.valueOf(8), insert3.get(4));
 
 //        List<Integer> insert4 =
 //                InsertElementToLinkedList.insertWithQuickSort(new LinkedList<>(Arrays.asList(1, 3, 5, 7, 9)), 0);
