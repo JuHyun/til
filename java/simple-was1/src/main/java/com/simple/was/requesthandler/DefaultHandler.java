@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 
 public class DefaultHandler implements BasicHandler {
@@ -102,7 +103,8 @@ public class DefaultHandler implements BasicHandler {
             try {
                 ErrorHtml errorHtml = HtmlDrawFactory.createHtml(HttpStatus.NOT_IMPLEMENTED.getStatusCode());
                 String body = errorHtml.load();
-                response.sendHeader("HTTP/1.0 501 Not Implemented", "text/html; charset=utf-8", body.length());
+                response.sendHeader("HTTP/1.0 501 Not Implemented", "text/html; charset=utf-8",
+                        body.getBytes(Charset.forName("UTF-8")).length);
                 response.writeBody(body);
             } catch (IOException e) {
                 e.printStackTrace();

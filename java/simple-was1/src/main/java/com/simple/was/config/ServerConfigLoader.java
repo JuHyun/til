@@ -46,23 +46,27 @@ public class ServerConfigLoader {
 
     private static String readConfigFile(String configFileName) {
         ClassLoader classLoader = ServerConfigLoader.class.getClassLoader();
-        InputStream resourceAsStream = classLoader.getResourceAsStream(configFileName);
-        if (resourceAsStream == null) {
-            LOGGER.error("There is no " + configFileName + " file.");
-            return null;
-        }
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(resourceAsStream));
-        String nextLine;
         StringBuilder stringBuilder = new StringBuilder();
-        while (true) {
-            try {
-                if ((nextLine = bufferedReader.readLine()) == null) break;
-                if (nextLine.length() == 0) break;
-                stringBuilder.append(nextLine);
-            } catch (IOException e) {
-                e.printStackTrace();
-                LOGGER.error("Config File Read Error. ", e);
+        try (InputStream resourceAsStream = classLoader.getResourceAsStream(configFileName)) {
+            if (resourceAsStream == null) {
+                LOGGER.error("There is no " + configFileName + " file.");
+                return null;
             }
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(resourceAsStream));
+            String nextLine;
+
+            while (true) {
+                try {
+                    if ((nextLine = bufferedReader.readLine()) == null) break;
+                    if (nextLine.length() == 0) break;
+                    stringBuilder.append(nextLine);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    LOGGER.error("Config File Read Error. ", e);
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.error("file read error", e);
         }
 
         return stringBuilder.toString();
