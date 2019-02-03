@@ -12,5 +12,5 @@ public interface BasicHttpRequest {
 
     String getVersion();
 
-    Map<String, String> getParams();
+    Map<String, Object> getParams();
 }

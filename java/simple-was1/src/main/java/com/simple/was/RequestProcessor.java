@@ -27,7 +27,7 @@ public class RequestProcessor implements Runnable {
     @Override
     public void run() {
         try {
-            Map<String, String> header = getHeader();
+            Map<String, Object> header = getHeader();
 
             HttpRequestProcessor httpRequestProcessor = new HttpRequestProcessor(header, serverConfig, requestHandlerManager);
             httpRequestProcessor.process(connection);
@@ -45,7 +45,7 @@ public class RequestProcessor implements Runnable {
         }
     }
 
-    private Map<String, String> getHeader() throws Exception {
+    private Map<String, Object> getHeader() throws Exception {
         HttpHeaderParser parser = new HttpHeaderParser();
         return parser.parse(connection.getInputStream());
     }

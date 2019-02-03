@@ -1,5 +1,6 @@
 package com.simple.was.httpRequest;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SimpleHttpRequest implements BasicHttpRequest {
@@ -8,11 +9,13 @@ public class SimpleHttpRequest implements BasicHttpRequest {
     private String requestUrl;
     private String requestFile;
     private String version;
+    private Map<String, Object> params;
 
-    public SimpleHttpRequest(String method, String requestUrl, String version) {
+    public SimpleHttpRequest(String method, String requestUrl, String version, Map<String, Object> params) {
         this.method = method;
         this.requestUrl = requestUrl;
         this.version = version;
+        this.params = params;
     }
 
     @Override
@@ -36,8 +39,8 @@ public class SimpleHttpRequest implements BasicHttpRequest {
     }
 
     @Override
-    public Map<String, String> getParams() {
-        return null;
+    public Map<String, Object> getParams() {
+        return params;
     }
 
     public void setRequestFile(String requestFile) {

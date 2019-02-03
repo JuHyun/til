@@ -6,4 +6,5 @@ public class HttpConstant {
     public static final String METHOD = "Method";
     public static final String FILE_NAME = "FileName";
     public static final String VERSION = "Version";
+    public static final String PARAMETERS = "Parameters";
 }

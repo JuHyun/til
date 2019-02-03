@@ -7,7 +7,6 @@ import com.simple.was.requesthandler.DefaultHandler;
 import com.simple.was.requesthandler.RequestHandlerManager;
 
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -22,15 +21,15 @@ public class HttpRequestProcessor {
 
     private static final String HTTP_ROOT = "webapp";
 
-    private Map<String, String> header;
+    private Map<String, Object> header;
     private ServerConfig serverConfig;
     private RequestHandlerManager requestHandlerManager;
-    private File rootDirectory;
     private VirtualHost virtualHost;
 
-    public HttpRequestProcessor() {};
+    public HttpRequestProcessor() {
+    }
 
-    public HttpRequestProcessor(Map<String, String> header, ServerConfig serverConfig, RequestHandlerManager requestHandlerManager) {
+    public HttpRequestProcessor(Map<String, Object> header, ServerConfig serverConfig, RequestHandlerManager requestHandlerManager) {
         this.header = header;
         this.serverConfig = serverConfig;
         this.requestHandlerManager = requestHandlerManager;
@@ -44,10 +43,11 @@ public class HttpRequestProcessor {
 
         String method = String.valueOf(header.get(HttpConstant.METHOD));
         String fileName = String.valueOf(header.get(HttpConstant.FILE_NAME));
-        String version = header.get(HttpConstant.VERSION);
-        String requestUrl = header.get(HttpConstant.HOST);
+        String version = String.valueOf(header.get(HttpConstant.VERSION));
+        String requestUrl = String.valueOf(header.get(HttpConstant.HOST));
+        Map<String, Object> params = (Map<String, Object>) header.get(HttpConstant.PARAMETERS);
 
-        SimpleHttpRequest request = new SimpleHttpRequest(method, requestUrl, version);
+        SimpleHttpRequest request = new SimpleHttpRequest(method, requestUrl, version, params);
         if (fileName != null) {
             request.setRequestFile(fileName.substring(1));
         }

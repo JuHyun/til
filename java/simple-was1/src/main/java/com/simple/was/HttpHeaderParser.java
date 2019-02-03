@@ -1,12 +1,16 @@
 package com.simple.was;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpHeaderParser {
 
-    public Map<String, String> parse(InputStream inputStream) throws Exception {
+    public Map<String, Object> parse(InputStream inputStream) throws Exception {
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
         Reader reader = new InputStreamReader(bufferedInputStream, "UTF-8");
         BufferedReader bufferedReader = new BufferedReader(reader);
@@ -14,7 +18,7 @@ public class HttpHeaderParser {
         String nextLine;
         int lineCount = 0;
 
-        Map<String, String> headerMap = new HashMap<String, String>();
+        Map<String, Object> headerMap = new HashMap<>();
         while ((nextLine = bufferedReader.readLine()) != null) {
             if (nextLine == null || nextLine.length() == 0) break;
 
@@ -23,7 +27,8 @@ public class HttpHeaderParser {
                 String version = "";
 
                 headerMap.put("Method", tokens[0]);
-                headerMap.put("FileName", tokens[1]);
+                headerMap.put("FileName", parseFileName(tokens[1]));
+                headerMap.put("Parameters", ParameterParser.parse(tokens[1]));
 
                 if (tokens.length > 2) {
                     version = tokens[2];
@@ -46,6 +51,11 @@ public class HttpHeaderParser {
             throw new Exception(String.format("Improperly formatted header: %s", headerLine));
         }
         return new String[]{headerLine.substring(0, colonIndex), headerLine.substring(colonIndex + 1, headerLine.length()).trim()};
+    }
+
+    private String parseFileName(String value) {
+        int index = value.indexOf("?");
+        return index > -1 ? value.substring(0, index) : value;
     }
 
     private boolean isFirstLine(int count) {

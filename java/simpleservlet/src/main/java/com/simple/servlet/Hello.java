@@ -15,11 +15,12 @@ public class Hello implements BasicHandler {
         LOGGER.info("Hello start!!");
 
         try {
+            String name = String.valueOf(basicHttpRequest.getParams().get("name"));
             String body =
                     new StringBuilder("<HTML>\r\n")
                             .append("<HEAD><TITLE>Hello Servlet</TITLE>\r\n").append("</HEAD>\r\n")
                             .append("<BODY>")
-                            .append("<H1>Hello, </H1>\r\n")
+                            .append("<H1>Hello, " + name + "</H1>\n")
                             .append("</BODY></HTML>\r\n").toString();
             if (basicHttpRequest.getVersion().startsWith("HTTP/")) { // send a MIME header
                 basicHttpResponse.sendHeader("HTTP/1.0 200 OK", "text/html; charset=utf-8", body.length());
