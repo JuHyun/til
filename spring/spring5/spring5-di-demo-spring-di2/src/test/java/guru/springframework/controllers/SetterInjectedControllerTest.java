@@ -1,6 +1,6 @@
 package guru.springframework.controllers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import guru.springframework.services.GreetingServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,5 +19,16 @@ class SetterInjectedControllerTest {
     @Test
     public void testGreeting() {
         assertEquals(GreetingServiceImpl.GREETING, controller.sayHello());
+    }
+
+    @Test
+    public void test() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("abcdef");
+
+        System.out.println(stringBuilder.toString().hashCode());
+
+        stringBuilder.append("12345678910");
+        System.out.println(stringBuilder.toString().hashCode());
     }
 }
