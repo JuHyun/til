@@ -9,3 +9,5 @@ java/simple-was1/target
 build/
 interview-practice/out/
 java/simpleservlet/target
+**/target/
+
