@@ -1,4 +1,4 @@
-package guru.springframework.services;
+package guru.services;
 
 import guru.springframework.repositories.GreetingRepository;
 
@@ -9,14 +9,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Primary
-@Profile({"en", "default"})
-public class PrimaryGreetingService implements GreetingService {
+@Profile("de")
+public class PrimaryGermanyGreetingService implements GreetingService {
+
+    private GreetingRepository greetingRepository;
 
     @Autowired
-    private GreetingRepository greetingRepository;
+    public void setGreetingRepository(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
 
     @Override
     public String sayGreeting() {
-        return greetingRepository.getEnglishGreeting();
+        return greetingRepository.getGermanGreeting();
     }
 }
