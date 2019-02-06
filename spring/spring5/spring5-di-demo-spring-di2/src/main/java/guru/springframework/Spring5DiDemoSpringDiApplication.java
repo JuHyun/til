@@ -2,6 +2,7 @@ package guru.springframework;
 
 import guru.springframework.controllers.MyContoller;
 import guru.springframework.examplebeans.FakeDataSource;
+import guru.springframework.examplebeans.FakeJMSBroker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +20,10 @@ public class Spring5DiDemoSpringDiApplication {
         FakeDataSource fakeDataSource = (FakeDataSource) applicationContext.getBean("fakeDataSource");
         System.out.println(String.format("%s, %s, %s", fakeDataSource.getUsername(),
                 fakeDataSource.getPassword(), fakeDataSource.getUrl()));
+
+        FakeJMSBroker fakeJMSBroker = (FakeJMSBroker) applicationContext.getBean("fakeJMSBroker");
+        System.out.println(String.format("jsmUsername: %s, jsmPassword: %s, jmsUrl: %s",
+                fakeJMSBroker.getUsername(), fakeJMSBroker.getPassword(), fakeJMSBroker.getUrl()));
     }
 }
 
