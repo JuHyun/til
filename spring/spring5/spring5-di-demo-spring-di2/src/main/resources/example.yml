@@ -1,0 +1,32 @@
+# This is a comment.
+
+owner:
+  name: John
+  names: # comment
+    - John
+    - Paul
+    - Ringo
+
+pound_sing: "#"
+
+book:
+  author: John
+  publisher: random house
+
+truh: yes
+
+another_truth: TRUE
+
+false: no # comment
+
+single_value: "This is a single sting"
+
+mulitiple_lines: |
+  first line
+  second line
+  third line
+
+ignore_new_lines: >
+  this is
+  just one long
+  string
