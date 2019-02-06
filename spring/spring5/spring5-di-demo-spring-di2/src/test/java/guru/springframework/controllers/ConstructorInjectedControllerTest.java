@@ -2,7 +2,7 @@ package guru.springframework.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import guru.services.GreetingServiceImpl;
+import guru.springframework.services.GreetingServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

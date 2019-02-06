@@ -1,7 +1,7 @@
-package guru.config;
+package guru.springframework.config;
 
-import guru.services.GreetingService;
-import guru.services.GreetingServiceFactory;
+import guru.springframework.services.GreetingService;
+import guru.springframework.services.GreetingServiceFactory;
 import guru.springframework.repositories.GreetingRepository;
 
 import org.springframework.context.annotation.Bean;

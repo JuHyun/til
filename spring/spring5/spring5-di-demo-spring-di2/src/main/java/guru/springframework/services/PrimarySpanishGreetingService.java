@@ -1,4 +1,4 @@
-package guru.services;
+package guru.springframework.services;
 
 import guru.springframework.repositories.GreetingRepository;
 
