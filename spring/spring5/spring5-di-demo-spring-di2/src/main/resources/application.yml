@@ -7,3 +7,15 @@ guru:
     username: yml_JMS_USERNAME
     password: yml_JMS_PASSWORD
     url: https://yml_JMS_URL.com
+
+
+
+---
+spring:
+  profiles: de
+
+guru:
+  jms:
+    username: yml_JMS_USERNAME++yml++de
+    password: yml_JMS_PASSWORDE++yml++de
+    url: https://yml_JMS_URL.comE++yml++de
