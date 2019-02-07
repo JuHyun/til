@@ -2,3 +2,7 @@ spring:
   banner:
     image:
       location: banner.jpeg
+
+  # Internationalization, i18n
+  messages:
+    basename: messages/messages
