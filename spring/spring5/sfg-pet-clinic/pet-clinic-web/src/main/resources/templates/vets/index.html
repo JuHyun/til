@@ -17,9 +17,13 @@
         </thead>
         <tbody>
         <tr th:each="vet : ${vets}">
-            <td th:text="${vet?.id}">1</td>
-            <td th:text="${vet?.firstName}">firstname</td>
-            <td th:text="${vet?.lastName}">lastname</td>
+            <td th:text="${vet.id}">1</td>
+            <td th:text="${vet.firstName}">firstname</td>
+            <td th:text="${vet.lastName}">lastname</td>
+            <td>
+                <span th:each="specialty : ${vet.specialties}"
+                      th:text="${specialty.description}">description</span>
+            </td>
         </tr>
         </tbody>
     </table>

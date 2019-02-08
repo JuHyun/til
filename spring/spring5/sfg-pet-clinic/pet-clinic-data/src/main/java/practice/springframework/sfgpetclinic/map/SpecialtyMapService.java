@@ -3,8 +3,11 @@ package practice.springframework.sfgpetclinic.map;
 import practice.springframework.sfgpetclinic.model.Specialty;
 import practice.springframework.sfgpetclinic.services.SpecialtyService;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Set;
 
+@Service
 public class SpecialtyMapService extends AbstractMapService<Specialty, Long> implements SpecialtyService {
 
     @Override
