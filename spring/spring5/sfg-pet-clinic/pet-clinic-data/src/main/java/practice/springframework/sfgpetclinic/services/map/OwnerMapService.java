@@ -1,4 +1,4 @@
-package practice.springframework.sfgpetclinic.map;
+package practice.springframework.sfgpetclinic.services.map;
 
 import org.springframework.stereotype.Service;
 import practice.springframework.sfgpetclinic.model.Owner;

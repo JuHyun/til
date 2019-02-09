@@ -1,4 +1,4 @@
-package practice.springframework.sfgpetclinic.map;
+package practice.springframework.sfgpetclinic.services.map;
 
 import practice.springframework.sfgpetclinic.model.Specialty;
 import practice.springframework.sfgpetclinic.services.SpecialtyService;
