@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,8 +34,8 @@ public class Recipe {
 
     private String directions;
 
-    // TODO: Enumeration Difficulty
-//    private Difficulty defficulty;
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty defficulty;
     @Lob
     private Byte[] image;
     @OneToOne(cascade = CascadeType.ALL)
