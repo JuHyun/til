@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "owner")
+@Table(name = "owners")
 public class Owner extends Person {
 
     @Column(name = "address")

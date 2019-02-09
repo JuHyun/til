@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pet")
+@Table(name = "pets")
 public class Pet extends BaseEntity {
 
     @Column(name = "name")

@@ -5,17 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "type")
+@Table(name = "types")
 public class PetType extends BaseEntity {
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "name")
+    private String name;
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 }

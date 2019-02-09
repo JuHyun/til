@@ -23,7 +23,7 @@
         <td th:text="${owner.lastName}"/>
         <td>
             <span th:each="pet : ${owner.pets}" th:text="${pet.name}"></span>
-            <span th:each="pet : ${owner.pets}" th:text="${pet.petType.type}"></span>
+            <span th:each="pet : ${owner.pets}" th:text="${pet.petType.name}"></span>
             <span th:each="pet : ${owner.pets}" th:text="${pet.birthDate}"></span>
         </td>
     </tr>
