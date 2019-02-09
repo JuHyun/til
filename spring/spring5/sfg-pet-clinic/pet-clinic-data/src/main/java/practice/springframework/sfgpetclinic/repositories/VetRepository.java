@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VetRepository extends CrudRepository<Vet, Long> {
+
+    Vet findByLastName(String lastName);
 }
