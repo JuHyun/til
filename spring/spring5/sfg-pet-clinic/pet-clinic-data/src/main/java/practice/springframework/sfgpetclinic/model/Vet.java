@@ -1,5 +1,12 @@
 package practice.springframework.sfgpetclinic.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +19,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "vets")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class Vet extends Person {
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -19,12 +32,4 @@ public class Vet extends Person {
             , joinColumns = @JoinColumn(name = "vet_id")
             , inverseJoinColumns = @JoinColumn(name = "specialty_id"))
     private Set<Specialty> specialties = new HashSet<>();
-
-    public Set<Specialty> getSpecialties() {
-        return specialties;
-    }
-
-    public void setSpecialties(Set<Specialty> specialties) {
-        this.specialties = specialties;
-    }
 }

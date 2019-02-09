@@ -68,12 +68,13 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Loaded specialty...");
 
-        Owner owner1 = new Owner();
-        owner1.setFirstName("Michael");
-        owner1.setLastName("Weston");
-        owner1.setAddress("Miami");
-        owner1.setCity("New York");
-        owner1.setTelephone("0101111111");
+        Owner owner1 = Owner.builder()
+                .firstName("Michael")
+                .lastName("Weston")
+                .address("Miami")
+                .city("New York")
+                .telephone("0101111111")
+                .build();
 
         Pet pet1 = new Pet();
         pet1.setPetType(dog);
