@@ -1,12 +1,13 @@
 package practice.springframework.sfgpetclinic.services.map;
 
-import org.springframework.stereotype.Service;
 import practice.springframework.sfgpetclinic.model.Owner;
 import practice.springframework.sfgpetclinic.model.Pet;
 import practice.springframework.sfgpetclinic.model.PetType;
 import practice.springframework.sfgpetclinic.services.OwnerSerivce;
 import practice.springframework.sfgpetclinic.services.PetService;
 import practice.springframework.sfgpetclinic.services.PetTypeService;
+
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -43,16 +44,16 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
     }
 
     @Override
-    public Owner save(Owner object) {
-        if (object == null) return null;
-        if (object.getPets() == null) return super.save(object);
+    public Owner save(Owner owner) {
+        if (owner == null) return null;
+        if (owner.getPets() == null) return super.save(owner);
 
-        object.getPets().stream().forEach(pet -> {
+        owner.getPets().stream().forEach(pet -> {
             savePetTypeConditional(pet.getPetType());
             savePetConditional(pet);
         });
 
-        return super.save(object);
+        return super.save(owner);
     }
 
     @Override
@@ -61,9 +62,8 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
     }
 
     private void savePetConditional(Pet pet) {
-        if (pet.getId() != null) {
-            Pet savedPet = petService.save(pet);
-            pet.setId(savedPet.getId());
+        if (pet.getId() == null) {
+            petService.save(pet);
         }
     }
 
