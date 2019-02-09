@@ -1,5 +1,6 @@
 package practice.springframework.mvc.recipe.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,10 +36,11 @@ public class Recipe {
 
     private String url;
 
+    @Lob
     private String directions;
 
     @Enumerated(value = EnumType.STRING)
-    private Difficulty defficulty;
+    private Difficulty difficulty;
 
     @Lob
     private Byte[] image;
@@ -46,13 +48,13 @@ public class Recipe {
     private Notes notes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredientSet;
+    private Set<Ingredient> ingredientSet = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "recipe_category"
             , joinColumns = @JoinColumn(name = "recipe_id")
             , inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categorySet;
+    private Set<Category> categorySet = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -118,12 +120,12 @@ public class Recipe {
         this.directions = directions;
     }
 
-    public Difficulty getDefficulty() {
-        return defficulty;
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 
-    public void setDefficulty(Difficulty defficulty) {
-        this.defficulty = defficulty;
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public Byte[] getImage() {
