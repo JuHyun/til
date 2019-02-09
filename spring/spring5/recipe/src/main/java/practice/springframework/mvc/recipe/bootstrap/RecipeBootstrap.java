@@ -1,5 +1,6 @@
 package practice.springframework.mvc.recipe.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import practice.springframework.mvc.recipe.domain.Category;
 import practice.springframework.mvc.recipe.domain.Difficulty;
 import practice.springframework.mvc.recipe.domain.Ingredient;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoryRepository categoryRepository;
@@ -34,6 +36,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        log.debug("Bootstap datas.");
         recipeRepository.saveAll(getRecipes());
     }
 
