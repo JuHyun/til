@@ -9,7 +9,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -36,13 +39,20 @@ public class Recipe {
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty defficulty;
+
     @Lob
     private Byte[] image;
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredientSet;
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category"
+            , joinColumns = @JoinColumn(name = "recipe_id")
+            , inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categorySet;
 
     public Long getId() {
         return id;
@@ -108,6 +118,14 @@ public class Recipe {
         this.directions = directions;
     }
 
+    public Difficulty getDefficulty() {
+        return defficulty;
+    }
+
+    public void setDefficulty(Difficulty defficulty) {
+        this.defficulty = defficulty;
+    }
+
     public Byte[] getImage() {
         return image;
     }
@@ -122,5 +140,21 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredientSet() {
+        return ingredientSet;
+    }
+
+    public void setIngredientSet(Set<Ingredient> ingredientSet) {
+        this.ingredientSet = ingredientSet;
+    }
+
+    public Set<Category> getCategorySet() {
+        return categorySet;
+    }
+
+    public void setCategorySet(Set<Category> categorySet) {
+        this.categorySet = categorySet;
     }
 }
