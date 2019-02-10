@@ -1,6 +1,9 @@
 package practice.springframework.mvc.recipe.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +24,8 @@ import javax.persistence.OneToOne;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Recipe {
 
     @Id
@@ -39,9 +44,6 @@ public class Recipe {
 
     private String url;
 
-    public Recipe() {
-    }
-
     @Lob
     private String directions;
 
@@ -50,6 +52,7 @@ public class Recipe {
 
     @Lob
     private Byte[] image;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
@@ -62,9 +65,21 @@ public class Recipe {
             , inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categorySet = new HashSet<>();
 
-    public void setNotes(Notes notes) {
+    @Builder
+    public Recipe(Long id, String description, Integer prepTime, Integer cookTime,
+                  Integer servings, String source, String url, String directions,
+                  Difficulty difficulty, Byte[] image, Notes notes) {
+        this.id = id;
+        this.description = description;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
+        this.servings = servings;
+        this.source = source;
+        this.url = url;
+        this.directions = directions;
+        this.difficulty = difficulty;
+        this.image = image;
         this.notes = notes;
-        notes.setRecipe(this);
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
