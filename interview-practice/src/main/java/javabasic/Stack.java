@@ -5,14 +5,18 @@ import java.util.List;
 
 public class Stack {
 
-    private final List values;
+    private final List<Object> values;
 
     public Stack() {
-        values = new LinkedList();
+        values = new LinkedList<>();
     }
 
     public void push(final Object object) {
         values.add(0, object);
+    }
+
+    public boolean empty() {
+        return values.size() <= 0;
     }
 
     public Object pop() {

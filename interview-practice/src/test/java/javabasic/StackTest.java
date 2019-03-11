@@ -1,35 +1,30 @@
 package javabasic;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class StackTest {
 
-    @Test
-    public void success() {
-        Stack stack = new Stack();
-        stack.push("1");
-        stack.push("2");
-        stack.push("3");
+    private final Stack stack = new Stack();
 
-        assertEquals("3", stack.pop());
+    private final String REMOVED = "string literal";
+
+    @BeforeEach
+    public void setUp() {
+        stack.push(1L);
+        stack.push(REMOVED);
     }
 
     @Test
-    public void successGeneric() {
-        GenericStack<Stack> genericStack = new GenericStack<>();
-        genericStack.push(makeStake("abcde", 5));
-        genericStack.push(makeStake("xyz", 3));
-
-        assertEquals(makeStake("xyz", 3).pop(), genericStack.pop().pop());
+    public void makeStack() {
+        assertFalse(stack.empty());
     }
 
-    private Stack makeStake(String value, int iterator) {
-        Stack stack = new Stack();
-        for (int i = 0; i < iterator; i++) {
-            stack.push(value);
-        }
-        return stack;
+    @Test
+    public void pop() {
+        assertEquals(REMOVED, stack.pop());
     }
 }

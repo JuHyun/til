@@ -1,7 +1,12 @@
 package javabasic;
 
 public class A {
+
     private int number;
+
+    public A(int number) {
+        this.number = number;
+    }
 
     public int getNumber() {
         return number;
