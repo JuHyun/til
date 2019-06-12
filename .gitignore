@@ -10,4 +10,4 @@ build/
 interview-practice/out/
 java/simpleservlet/target
 **/target/
-
+scala/scala-tour/out/
