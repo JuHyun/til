@@ -2,7 +2,7 @@ package lectures.part2oop
 
 object MethodNotations extends App {
 
-  class Person(val name: String, favoriteMovie: String) {
+  class Person(val name: String, favoriteMovie: String, val age: Int = 0) {
 
     def likes(movie: String): Boolean = movie == favoriteMovie
 
@@ -15,9 +15,19 @@ object MethodNotations extends App {
     def isAlive: Boolean = true
 
     def apply(): String = s"Hi, I'm $name and I love $favoriteMovie."
+
+    def +(nickname: String): Person = new Person(s"$name ($nickname)", favoriteMovie)
+
+    def unary_+ : Person = new Person(name, favoriteMovie, age + 1)
+
+    def learns(subject: String): String = s"$name learns $subject"
+
+    def learnScala: String = this learns "Scala"
+
+    def apply(n: Int): String = s"$name watched $favoriteMovie $n times."
   }
 
-  val mary = new Person("Mary", "Inception")
+  val mary = new Person("Mary", "Inception", 20)
   println(mary.likes("Inception"))
 
   // infix notation or operator notation
@@ -50,4 +60,16 @@ object MethodNotations extends App {
   // Apply
   println(mary.apply()) // equivalent mary()
   println(mary())
+
+  println((mary + "the rockstar").name)
+  println((mary + "the rockstar")())
+
+  val olderMary = (+mary)
+  println(olderMary.age)
+
+  println(olderMary.learns("Scala"))
+
+  println(olderMary learnScala)
+
+  println(mary.apply(2))
 }
