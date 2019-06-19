@@ -13,3 +13,5 @@ scalaVersion := "2.12.8"
 libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice )
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
+
+PlayKeys.devSettings += "play.server.http.port" -> "8080"
