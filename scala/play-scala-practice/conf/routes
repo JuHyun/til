@@ -19,3 +19,5 @@ GET        /:page               controllers.HomeController.showPage(page: Long)
 
 ->         /clients             api.ApiRouter
 ->         /samples             api.SampleRouter
+
+->         /sessions            api.SessionRouter
