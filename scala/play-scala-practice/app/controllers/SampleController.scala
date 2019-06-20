@@ -2,7 +2,7 @@ package controllers
 
 import akka.util.ByteString
 import javax.inject.{Inject, Singleton}
-import play.api.Logger
+import play.api.Logging
 import play.api.http.HttpEntity
 import play.api.mvc._
 
@@ -10,15 +10,19 @@ import scala.concurrent.ExecutionContext
 
 @Singleton
 class SampleController @Inject()(cc: ControllerComponents)
-                                (implicit ec: ExecutionContext) extends AbstractController(cc) {
+                                (implicit ec: ExecutionContext) extends AbstractController(cc) with Logging {
+
+  implicit val myCustomCharset = Codec.javaSupported("euc-kr")
 
   def anotherMethod(params: String)(implicit request: Request[_]) = {
-    Logger.info(s"Using the anotherMethod with implicit ==> $request, params = $params")
+    logger.info(s"Using the anotherMethod with implicit ==> $request, params = $params")
   }
 
   def echo = Action { implicit request =>
     anotherMethod("Some Param value")
-    Ok("Got request [" + request + "]")
+    Ok("성주현 [" + request + "]")
+      .withCookies(Cookie("theme", "blue"))
+      .bakeCookies()
   }
 
   def hello(name: String) = Action {
@@ -27,6 +31,7 @@ class SampleController @Inject()(cc: ControllerComponents)
 
   def user = Action(parse.json) { implicit request =>
     Ok("Got request[" + request + "]")
+      .discardingCookies(DiscardingCookie("theme"))
   }
 
   def index = Action { implicit request =>
