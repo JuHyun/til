@@ -14,11 +14,11 @@ abstract class MyList[+A] {
 
   override def toString: String = "[" + printElements + "]"
 
-  def map[B](transformer: MyTransform[A, B]): MyList[B]
+  def map[B](transformer: A => B): MyList[B]
 
-  def flatMap[B](transformer: MyTransform[A, MyList[B]]): MyList[B]
+  def flatMap[B](transformer: A => MyList[B]): MyList[B]
 
-  def filter(predicate: MyPredicate[A]): MyList[A]
+  def filter(predicate: A => Boolean): MyList[A]
 
   def ++[B >: A](list: MyList[B]): MyList[B]
 
@@ -35,11 +35,11 @@ case object Empty extends MyList[Nothing] {
 
   override def printElements: String = ""
 
-  override def map[B](transformer: MyTransform[Nothing, B]): MyList[B] = Empty
+  override def map[B](transformer: Nothing => B): MyList[B] = Empty
 
-  override def flatMap[B](transformer: MyTransform[Nothing, MyList[B]]): MyList[B] = Empty
+  override def flatMap[B](transformer: Nothing => MyList[B]): MyList[B] = Empty
 
-  override def filter(predicate: MyPredicate[Nothing]): MyList[Nothing] = Empty
+  override def filter(predicate: Nothing => Boolean): MyList[Nothing] = Empty
 
   override def ++[B >: Nothing](list: MyList[B]): MyList[B] = list
 }
@@ -58,8 +58,8 @@ case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
     else head + " " + tail.printElements
   }
 
-  override def map[B](transformer: MyTransform[A, B]): MyList[B] =
-    new Cons(transformer.transform(h), t.map(transformer))
+  override def map[B](transformer: A => B): MyList[B] =
+    new Cons(transformer(h), t.map(transformer))
 
   /**
     * [1, 2].flatMap(n => [n, n+1])
@@ -67,12 +67,12 @@ case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
     * = [1, 2] ++ [2, 3] ++ Empty.flatMap(n => [n, n+1])
     * = [1,2,2,3]
     **/
-  override def flatMap[B](transformer: MyTransform[A, MyList[B]]): MyList[B] = {
-    transformer.transform(h) ++ t.flatMap(transformer)
+  override def flatMap[B](transformer: A => MyList[B]): MyList[B] = {
+    transformer(h) ++ t.flatMap(transformer)
   }
 
-  override def filter(predicate: MyPredicate[A]): MyList[A] = {
-    if (predicate.test(h)) new Cons(h, t.filter(predicate))
+  override def filter(predicate: A => Boolean): MyList[A] = {
+    if (predicate(h)) new Cons(h, t.filter(predicate))
     else t.filter(predicate)
   }
 
@@ -85,13 +85,6 @@ case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
   override def ++[B >: A](list: MyList[B]): MyList[B] = new Cons(h, t ++ list)
 }
 
-trait MyPredicate[-A] {
-  def test(element: A): Boolean
-}
-
-trait MyTransform[-A, B] {
-  def transform(element: A): B
-}
 
 object ListTest extends App {
   val list1 = new Cons(1, Empty)
@@ -114,22 +107,16 @@ object ListTest extends App {
   val listOfString = new Cons("Hello", new Cons("Scala", Empty))
   println(listOfString.toString)
 
-  val greaterThanTwo = new MyPredicate[Int] {
-    def test(element: Int): Boolean = element > 2
-  }
+  val greaterThanTwo: Int => Boolean = element => element > 2
 
   println(list2.filter(greaterThanTwo))
 
-  val doubled = new MyTransform[Int, Int] {
-    def transform(element: Int): Int = element * element
-  }
+  val doubled: Int => Int = element => element * element
   println(list2.map(doubled))
 
   println(list1 ++ list2)
 
-  val expendElement = new MyTransform[Int, MyList[Int]] {
-    def transform(element: Int): MyList[Int] = new Cons(element, new Cons(element + 1, Empty))
-  }
+  val expendElement: Int => MyList[Int] = (element: Int) => new Cons(element, new Cons(element + 1, Empty))
 
   println(list2.flatMap(expendElement))
 
