@@ -107,11 +107,11 @@ object ListTest extends App {
   val listOfString = new Cons("Hello", new Cons("Scala", Empty))
   println(listOfString.toString)
 
-  val greaterThanTwo: Int => Boolean = element => element > 2
+  val greaterThanTwo: Int => Boolean = _ > 2
 
   println(list2.filter(greaterThanTwo))
 
-  val doubled: Int => Int = element => element * element
+  val doubled: Int => Int = _ * 2
   println(list2.map(doubled))
 
   println(list1 ++ list2)
