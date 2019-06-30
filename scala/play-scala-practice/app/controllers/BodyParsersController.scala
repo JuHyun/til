@@ -5,7 +5,8 @@ import play.api.libs.json.JsValue
 import play.api.mvc.{AbstractController, ControllerComponents, Request}
 
 @Singleton
-class BodyParsersController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class BodyParsersController @Inject()(loggingAction: LoggingAction,
+                                      cc: ControllerComponents) extends AbstractController(cc) {
 
   //  def save = Action { request: Request[AnyContent] =>
   //    val body: AnyContent = request.body
@@ -20,8 +21,7 @@ class BodyParsersController @Inject()(cc: ControllerComponents) extends Abstract
   //      }
   //  }
 
-  def save = Action(parse.json) { request: Request[JsValue] =>
-    //    Ok("Got: " + (request.body \ "name").as[String])
-    Ok(request.body)
+  def save = loggingAction(parse.json) { request: Request[JsValue] =>
+    Ok("Got a body " + request.body.toString().length + " bytes long")
   }
 }
