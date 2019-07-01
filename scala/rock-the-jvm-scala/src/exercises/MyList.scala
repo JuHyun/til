@@ -243,4 +243,16 @@ object ListTest extends App {
   val ordered = andThen(add3, times3)
   println(ordered(10))
 
+  /**
+    * MyList supports for comprehensions?
+    * map(f: A => B): MyList[B]
+    * flatMap(f: A => MyList[B]): MyList[B]
+    * filter(p: A => Boolean): MyList[A]
+    */
+  val myCombinations = for {
+    l1 <- list1
+    l2 <- list2
+  } yield l2 - l1
+  println(myCombinations)
+
 }
