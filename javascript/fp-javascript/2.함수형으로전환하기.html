@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>함수형으로 전환하기</title>
+</head>
+<body>
+  <script>
+  var users = [
+    { id: 1, name: 'Angelina', age: 43 },
+    { id: 2, name: 'Bread', age: 49 },
+    { id: 3, name: 'Djokovichi', age: 32 },
+    { id: 4, name: 'Peter', age: 46 },
+    { id: 5, name: 'Sharapova', age: 30 },
+    { id: 6, name: 'Nick', age: 21 },
+    { id: 7, name: 'Eujean', age: 4 },
+    { id: 8, name: 'Onyou', age: 10 },
+  ];
+
+  // 1. 명령형 코드
+  // 1) 30세 이상인 users를 거른다.
+  var over_thirties = [];
+  for (let index = 0; index < users.length; index++) {
+    if (users[index].age >= 30) {
+      over_thirties.push(users[index]);
+    }
+  }
+  console.log(over_thirties);
+  
+  // 2) 30세 이상인 users의 이름을 거른다.
+  var over_thirties_names = [];
+  for(let index = 0; index < over_thirties.length; index++) {
+    over_thirties_names.push(over_thirties[index].name);
+  }
+  console.log( over_thirties_names );
+
+  // 3) 30세 미만인 users를 거른다.
+  var under_thirties = [];
+  for (let index = 0; index < users.length; index++) {
+    if (users[index].age < 30) {
+      under_thirties.push(users[index]);
+    }
+  }
+  console.log(under_thirties);
+
+  // 2) 30세 미만인 users의 이름을 거른다.
+  var under_thirties_names = [];
+  for(let index = 0; index < under_thirties.length; index++) {
+    under_thirties_names.push(under_thirties[index].name);
+  }
+  console.log( under_thirties_names );
+
+  // 2. _filter, _map으로 리팩토링하기.
+  function _filter(list, predicate) {
+    let new_list = [];
+    for (let index = 0; index < users.length; index++) {
+      if (predicate(list[index])) {
+        new_list.push(list[index]);
+      }
+    } 
+    return new_list;
+  }
+
+  function _map(list, mapper) {
+    let new_list = [];
+    for(let index = 0; index < list.length; index++) {
+      new_list.push(mapper(list[index]));
+    }
+    return new_list;
+  }
+
+  function predicateOver30(user) {
+    return user.age >= 30;
+  }
+
+  var over_30 = _filter(users, predicateOver30);
+  console.log('over_30 => ', over_30);
+
+  function predicateUnder30(user) {
+    return user.age < 30;
+  }
+
+  var under_30 = _filter(users, predicateUnder30);
+  console.log(under_30);
+
+  console.log(
+    _filter([1,2,3,4], function(num) { return num % 2; })
+  );
+
+  console.log(
+    _filter([1,2,3,4], function(num) { return !(num % 2); })
+  );
+
+  console.log('_map ==> ', 
+    _map(over_30, function(user) { return user.name; } )
+  );
+
+  console.log('_map ==> ', 
+    _map(under_30, function(user) { return user.name; } )
+  );
+
+  console.log('_map ==> ', 
+    _map(under_30, function(user) { return user.age; } )
+  );
+
+  console.log('_map & _filter => ', 
+    _map(
+      _filter(users, function(user) { return user.age > 30 } ),
+      function(user) { return user.name; }
+    )
+  );
+
+  console.log('_map & _filter => ', 
+    _map(
+      _filter(users, function(user) { return user.age < 30 } ),
+      function(user) { return user.age; }
+    )
+  );
+  </script>
+</body>
+</html>
