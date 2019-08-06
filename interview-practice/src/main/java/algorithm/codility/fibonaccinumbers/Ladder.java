@@ -62,7 +62,7 @@ public class Ladder {
     }
 
     public int[] solution(int[] A, int[] B) {
-        if (memoization[])
+//        if (memoization[])
         if (this.L <= 1) {
             Arrays.fill(memoization, 1 % (int) Math.pow(2, B[this.L - 1]));
         }
@@ -71,5 +71,7 @@ public class Ladder {
             Arrays.fill(memoization, 1 % (int) Math.pow(2, B[this.L - 1]));
             return memoization;
         }
+
+        return memoization;
     }
 }
