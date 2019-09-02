@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -157,5 +158,42 @@ public class TransactionTest {
                 );
         pythagoreanTriples2.limit(5)
                 .forEach(t -> System.out.println(t[0] + ", " + t[1] + ", " + t[2]));
+    }
+
+    // 0, 1, 1, 2, 3, 5, 8, 13
+    @Test
+    public void fibonacci() {
+//        Stream.iterate(new int[]{0, 1}, e -> new int[]{e[1], e[0] + e[1]})
+//                .limit(20)
+//                .forEach(e -> System.out.println(e[0] + ", " + e[1]));
+
+        Stream.iterate(new int[]{0, 1}, e -> new int[]{e[1], e[0] + e[1]})
+                .limit(20)
+                .map(e -> e[0])
+                .forEach(System.out::println);
+    }
+
+    @Test
+    public void generate() {
+//        IntStream ones = IntStream.generate(() -> 1);
+//        ones.limit(10).forEach(System.out::println);
+
+        IntSupplier fibonacci = new IntSupplier() {
+            int previous = 0;
+            int current = 1;
+
+            @Override
+            public int getAsInt() {
+                int temp = previous;
+                previous = current;
+                current = previous + temp;
+
+                return temp;
+            }
+        };
+
+        IntStream.generate(fibonacci)
+                .limit(10)
+                .forEach(System.out::println);
     }
 }

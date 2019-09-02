@@ -20,4 +20,12 @@ public class Apple implements Serializable {
     public Integer getWeight() {
         return weight;
     }
+
+    @Override
+    public String toString() {
+        return "Apple{" +
+                "color='" + color + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }
