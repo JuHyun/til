@@ -2,28 +2,29 @@ import { getTasks as apiGetTasks } from './apis/task';
 import Counter from './utils/counter';
 
 const state = {
-  counter:  Counter(),
   tasks: [],
+  counter: Counter(),
 };
 
-export const clearTask = () => {
+const clearTasks = () => {
   state.tasks = [];
-}
+};
 
-export const fetchTasks = async () => {
+const fetchTasks = async () => {
   const tasks = await apiGetTasks();
   const maxId = Math.max(0, ...tasks.map(task => task.id));
   state.counter = Counter(maxId);
-  state.tasks = tasks;
+  state.tasks = tasks.slice(0, 10);
   return state.tasks;
 }
 
-export const getTasks = () => {
+const getTasks = () => {
   return state.tasks;
 }
 
-export const addTask = title => {
+const addTask = (title) => {
   const { counter } = state;
+
   state.tasks = [
     ...state.tasks,
     { id: counter(), title, completed: false }
@@ -32,17 +33,18 @@ export const addTask = title => {
   return state.tasks;
 }
 
-export const removeTask = id => {
-  state.tasks = state.tasks.filter(task => task.id !== id);
-  return state.tasks;
-}
+const removeTask = (id) => {
+  const { tasks } = state;
 
-export const toggleTask = id => {
-  state.tasks.forEach(task => {
-    if (task.id === id) {
-      task.completed = !task.completed;
-    }
-  });
+  state.tasks = tasks.filter(task => task.id !== id);
 
   return state.tasks;
 }
+
+export {
+  clearTasks,
+  fetchTasks,
+  getTasks,
+  addTask,
+  removeTask,
+};

@@ -3,56 +3,53 @@ jest.mock('./apis/task');
 
 import { setMockCount } from './utils/counter';
 import { setMockTasks } from './apis/task';
-import { 
-  clearTask, 
-  getTasks, 
-  fetchTasks, 
+
+import {
+  clearTasks,
+  fetchTasks,
+  getTasks,
   addTask,
   removeTask,
-  toggleTask,
-} from './service';
+} from './services';
 
 beforeEach(() => {
-  setMockCount(1);
+  setMockCount(100);
 
-  clearTask();
+  clearTasks();
 });
 
 test('clearTasks', () => {
+  clearTasks();
+
   expect(getTasks()).toEqual([]);
 });
 
 test('fetchTasks', async () => {
   setMockTasks([
-    { id: 1, title: 'TDD Practice', completed: false },
+    { id: 100, title: 'hello', completed: false }
   ]);
 
   const tasks = await fetchTasks();
 
   expect(tasks).toEqual([
-    { id: 1, title: 'TDD Practice', completed: false },
+    { id: 100, title: 'hello', completed: false }
   ]);
 });
 
 test('addTask', () => {
-  const tasks = addTask('FP');
+  const tasks = addTask('hello');
 
   expect(tasks).toEqual([
-    { id: 1, title: 'FP', completed: false },
+    { id: 100, title: 'hello', completed: false }
   ]);
 });
 
 test('removeTask', () => {
-  addTask('Hello');
-
-  const tasks = removeTask(1);
-  expect(tasks).toEqual([]);
-});
-
-test('toggleTask', () => {
-  addTask('Hello');
-
-  const tasks = toggleTask(1);
+  setMockTasks([
+    { id: 100, title: 'hello', completed: false }
+  ]);
   
-  expect(tasks).toEqual([{ id: 1, title: 'Hello', completed: true }]);
+  const tasks = removeTask(100);
+
+  expect(tasks).toEqual([]);
 });
