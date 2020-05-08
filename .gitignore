@@ -13,3 +13,5 @@ java/simpleservlet/target
 
 scala/scala-tour/out/
 scala/rock-the-jvm-scala/out/
+javascript/list-like/node_modules/
+*/node_modules/

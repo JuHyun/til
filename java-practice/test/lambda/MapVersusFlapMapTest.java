@@ -1,14 +1,14 @@
 package lambda;
 
 
-import org.junit.jupiter.api.Test;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
 
 public class MapVersusFlapMapTest {
 
