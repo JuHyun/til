@@ -1,0 +1,12 @@
+package item6;
+
+public class Sum {
+
+    public static long sum() {
+        long sum = 0L;
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+}
